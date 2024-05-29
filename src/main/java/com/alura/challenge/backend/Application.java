@@ -1,4 +1,4 @@
-package com.alura.challenge.backend_7;
+package com.alura.challenge.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
