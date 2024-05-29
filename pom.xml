@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.alura</groupId>
-	<artifactId>challenge.backend-7</artifactId>
+	<artifactId>alura.challenge</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>challenge.backend-7</name>
+	<name>alura.challenge</name>
 	<description>Jornada Milhas</description>
 	<properties>
 		<java.version>17</java.version>
