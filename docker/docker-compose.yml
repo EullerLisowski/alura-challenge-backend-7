@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    container_name: jornada-milhas
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: jornada_milhas
+    ports:
+      - 3306:3306
+    volumes:
+      - /var/lib/docker/volumes/jornada_milhas/_data
+
+# sudo docker rename docker-db-1 jornada-milhas
+# sudo docker exec -it jornada-milhas bash
+# mysql -p
+# show databases;
+# create database jornada_milhas;
