@@ -1,4 +1,4 @@
-package com.alura.challenge.backend_7;
+package com.alura.challenge.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
