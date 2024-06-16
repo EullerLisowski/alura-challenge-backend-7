@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
 public class ResourceExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity entityNotFoundException(EntityNotFoundException ex, HttpServletRequest request) {
+    public ResponseEntity<StandardError> entityNotFoundException(EntityNotFoundException ex, HttpServletRequest request) {
         StandardError standardError = new StandardError(
                 System.currentTimeMillis(),
                 HttpStatus.NOT_FOUND.value(),
@@ -27,7 +27,7 @@ public class ResourceExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity methodArgumentNotValidException(MethodArgumentNotValidException ex, HttpServletRequest request) {
+    public ResponseEntity<StandardError> methodArgumentNotValidException(MethodArgumentNotValidException ex, HttpServletRequest request) {
         var erros = ex.getFieldErrors();
         StandardError standardError = new StandardError(
                 HttpStatus.BAD_REQUEST.value(),
@@ -39,7 +39,7 @@ public class ResourceExceptionHandler {
     }
 
     @ExceptionHandler({NoSuchElementException.class, NoResourceFoundException.class})
-    public ResponseEntity noRegisterFound(Exception ex, HttpServletRequest request) {
+    public ResponseEntity<StandardError> noRegisterFound(Exception ex, HttpServletRequest request) {
         StandardError standardError = new StandardError(
                 HttpStatus.NOT_FOUND.value(),
                 "Nenhum registro encontrado para os parâmetros informados.",
