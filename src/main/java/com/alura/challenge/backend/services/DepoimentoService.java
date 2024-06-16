@@ -21,4 +21,15 @@ public class DepoimentoService {
 
         return new DepoimentoDto(depoimento.getId(), depoimento.getNome(), depoimento.getDepoimento(), depoimento.getFoto());
     }
+
+    public DepoimentoDto findById(Long id) {
+        var depoimento = repository.findById(id).orElseThrow();
+
+        return new DepoimentoDto(
+                depoimento.getId(),
+                depoimento.getNome(),
+                depoimento.getDepoimento(),
+                depoimento.getFoto()
+        );
+    }
 }
