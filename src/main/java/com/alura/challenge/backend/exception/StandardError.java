@@ -27,14 +27,6 @@ public class StandardError implements Serializable {
     private String path;
     private Map<String, Object> map;
 
-    public StandardError(Long timeStamp, Integer status, String error, String message, String path) {
-        this.timeStamp = timeStamp;
-        this.status = status;
-        this.error = error;
-        this.message = message;
-        this.path = path;
-    }
-
     public StandardError(Long timeStamp, Integer status, String error, String path) {
         this.timeStamp = timeStamp;
         this.status = status;
@@ -46,5 +38,6 @@ public class StandardError implements Serializable {
         this.timeStamp = System.currentTimeMillis();
         this.status = status;
         this.message = message;
+        this.path = path;
     }
 }
