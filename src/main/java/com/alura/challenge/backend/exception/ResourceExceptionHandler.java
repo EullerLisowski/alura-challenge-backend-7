@@ -15,14 +15,29 @@ import java.util.NoSuchElementException;
 public class ResourceExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity entityNotFoundException() {
-        return ResponseEntity.notFound().build();
+    public ResponseEntity entityNotFoundException(EntityNotFoundException ex, HttpServletRequest request) {
+        StandardError standardError = new StandardError(
+                System.currentTimeMillis(),
+                HttpStatus.NOT_FOUND.value(),
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND.value()).body(standardError);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity methodArgumentNotValidException(MethodArgumentNotValidException ex) {
+    public ResponseEntity methodArgumentNotValidException(MethodArgumentNotValidException ex, HttpServletRequest request) {
         var erros = ex.getFieldErrors();
-        return ResponseEntity.badRequest().body(erros.stream().map(DataValidationError::new).toList());
+        StandardError standardError = new StandardError(
+                HttpStatus.BAD_REQUEST.value(),
+                "Requisição inválida.",
+                request.getRequestURI());
+        standardError.setErrors(erros.stream().map(DataValidationError::new).toList());
+
+        return ResponseEntity.badRequest().body(standardError);
+    }
+
     @ExceptionHandler({NoSuchElementException.class, NoResourceFoundException.class})
     public ResponseEntity noRegisterFound(Exception ex, HttpServletRequest request) {
         StandardError standardError = new StandardError(
