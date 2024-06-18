@@ -3,7 +3,6 @@ package com.alura.challenge.backend.controllers;
 import com.alura.challenge.backend.domain.dtos.DepoimentoDto;
 import com.alura.challenge.backend.domain.dtos.DepoimentoInsertDto;
 import com.alura.challenge.backend.services.DepoimentoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +12,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RequestMapping("depoimentos")
 public class DepoimentoController {
 
-    @Autowired
-    private DepoimentoService service;
+    private final DepoimentoService service;
+    
+    public DepoimentoController(DepoimentoService service) {
+        this.service = service;
+    }
 
     @PostMapping
     public ResponseEntity<DepoimentoDto> create(@RequestBody @Validated DepoimentoInsertDto dto) {
