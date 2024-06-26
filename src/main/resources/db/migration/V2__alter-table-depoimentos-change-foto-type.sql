@@ -1,0 +1,1 @@
+alter table depoimentos modify foto varchar(255);
