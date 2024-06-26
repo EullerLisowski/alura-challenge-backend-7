@@ -6,10 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.validation.FieldError;
 
-@SpringBootTest(classes = StandardErrorTest.class)
 class StandardErrorTest {
 
     @Test

@@ -13,7 +13,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class StandardError implements Serializable {
 

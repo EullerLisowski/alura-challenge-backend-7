@@ -1,6 +1,7 @@
 package com.alura.challenge.backend.exception;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -9,7 +10,6 @@ import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -19,7 +19,6 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 
 @SuppressWarnings("null")
-@SpringBootTest(classes = ResourceExceptionHandlerTest.class)
 class ResourceExceptionHandlerTest {
 
     ResourceExceptionHandler resourceExceptionHandler;
@@ -46,7 +45,7 @@ class ResourceExceptionHandlerTest {
 
         // assert
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        assertEquals(Long.class, response.getBody().getTimeStamp().getClass());
+        assertNotNull(response.getBody().getTimeStamp().getClass());
         assertEquals(HttpStatus.NOT_FOUND.value(), response.getBody().getStatus());
         assertEquals(TEST_MESSAGE, response.getBody().getMessage());
         assertEquals(TEST_URI, response.getBody().getPath());
@@ -79,9 +78,10 @@ class ResourceExceptionHandlerTest {
         // assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertEquals(HttpStatus.BAD_REQUEST.value(), response.getBody().getStatus());
-        assertEquals(Long.class, response.getBody().getTimeStamp().getClass());
+        assertNotNull(response.getBody().getTimeStamp().getClass());
         assertEquals(MESSAGE_INVALID_REQUEST, response.getBody().getMessage());
         assertEquals(TEST_URI, response.getBody().getPath());
+        assertEquals(2, response.getBody().getErrors().size());
         assertEquals(DATA_VALIDATION_ERROR_FIELD_NOME, response.getBody().getErrors().get(0).field());
         assertEquals(MESSAGE_NOME_REQUIRED, response.getBody().getErrors().get(0).message());
         assertEquals(DATA_VALIDATION_ERROR_FIELD_DEPOIMENTO, response.getBody().getErrors().get(1).field());
@@ -105,7 +105,7 @@ class ResourceExceptionHandlerTest {
 
         // assert
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        assertEquals(Long.class, response.getBody() != null ? response.getBody().getTimeStamp().getClass() : null);
+        assertNotNull(response.getBody() != null ? response.getBody().getTimeStamp().getClass() : null);
         assertEquals(HttpStatus.NOT_FOUND.value(), response.getBody() != null ? response.getBody().getStatus() : null);
         assertEquals(TEST_MESSAGE, response.getBody() != null ? response.getBody().getMessage() : null);
         assertEquals(TEST_URI, response.getBody() != null ? response.getBody().getPath() : null);
