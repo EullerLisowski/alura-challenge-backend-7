@@ -19,7 +19,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SuppressWarnings("null")
-@SpringBootTest(classes = ResourceExceptionHandler.class)
 class ResourceExceptionHandlerTest {
 
     ResourceExceptionHandler resourceExceptionHandler;
