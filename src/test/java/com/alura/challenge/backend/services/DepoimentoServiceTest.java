@@ -1,22 +1,22 @@
-package com.alura.challenge.backend.service;
+package com.alura.challenge.backend.services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.any;
-
+import com.alura.challenge.backend.domain.dtos.DepoimentoDto;
+import com.alura.challenge.backend.domain.dtos.DepoimentoInsertDto;
 import com.alura.challenge.backend.domain.entities.Depoimento;
+import com.alura.challenge.backend.repositories.DepoimentoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import com.alura.challenge.backend.domain.dtos.DepoimentoDto;
-import com.alura.challenge.backend.domain.dtos.DepoimentoInsertDto;
-import com.alura.challenge.backend.repositories.DepoimentoRepository;
-import com.alura.challenge.backend.services.DepoimentoService;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 
+@SpringBootTest(classes = DepoimentoService.class)
 class DepoimentoServiceTest {
 
     @InjectMocks

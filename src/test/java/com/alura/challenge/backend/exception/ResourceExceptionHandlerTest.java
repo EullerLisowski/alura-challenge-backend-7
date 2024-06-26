@@ -1,24 +1,25 @@
 package com.alura.challenge.backend.exception;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.util.List;
-import java.util.NoSuchElementException;
-
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @SuppressWarnings("null")
+@SpringBootTest(classes = ResourceExceptionHandler.class)
 class ResourceExceptionHandlerTest {
 
     ResourceExceptionHandler resourceExceptionHandler;
@@ -105,9 +106,9 @@ class ResourceExceptionHandlerTest {
 
         // assert
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        assertNotNull(response.getBody() != null ? response.getBody().getTimeStamp().getClass() : null);
-        assertEquals(HttpStatus.NOT_FOUND.value(), response.getBody() != null ? response.getBody().getStatus() : null);
-        assertEquals(TEST_MESSAGE, response.getBody() != null ? response.getBody().getMessage() : null);
-        assertEquals(TEST_URI, response.getBody() != null ? response.getBody().getPath() : null);
+        assertNotNull(response.getBody().getTimeStamp().getClass());
+        assertEquals(HttpStatus.NOT_FOUND.value(), response.getBody().getStatus());
+        assertEquals(TEST_MESSAGE, response.getBody().getMessage());
+        assertEquals(TEST_URI, response.getBody().getPath());
     }
 }

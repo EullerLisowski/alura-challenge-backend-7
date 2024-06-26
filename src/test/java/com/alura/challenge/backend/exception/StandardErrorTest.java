@@ -1,13 +1,15 @@
 package com.alura.challenge.backend.exception;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.validation.FieldError;
 
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.validation.FieldError;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
+@SpringBootTest(classes = StandardError.class)
 class StandardErrorTest {
 
     @Test
