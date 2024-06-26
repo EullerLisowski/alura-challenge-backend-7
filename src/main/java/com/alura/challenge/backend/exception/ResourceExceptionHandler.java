@@ -17,7 +17,6 @@ public class ResourceExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<StandardError> entityNotFoundException(EntityNotFoundException ex, HttpServletRequest request) {
         StandardError standardError = new StandardError(
-                System.currentTimeMillis(),
                 HttpStatus.NOT_FOUND.value(),
                 ex.getMessage(),
                 request.getRequestURI()
