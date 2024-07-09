@@ -1,15 +1,15 @@
 package com.alura.challenge.backend.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.alura.challenge.backend.domain.dtos.DepoimentoDto;
 import com.alura.challenge.backend.domain.dtos.DepoimentoInsertDto;
 import com.alura.challenge.backend.domain.dtos.DepoimentoUpdateDto;
 import com.alura.challenge.backend.domain.entities.Depoimento;
 import com.alura.challenge.backend.repositories.DepoimentoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class DepoimentoService {
@@ -21,7 +21,8 @@ public class DepoimentoService {
         var depoimento = new Depoimento(null, dto.nome(), dto.depoimento(), dto.foto());
         depoimento = repository.save(depoimento);
 
-        return new DepoimentoDto(depoimento.getId(), depoimento.getNome(), depoimento.getDepoimento(), depoimento.getFoto());
+        return new DepoimentoDto(depoimento.getId(), depoimento.getNome(), depoimento.getDepoimento(),
+                depoimento.getFoto());
     }
 
     public DepoimentoDto findById(Long id) {
@@ -31,14 +32,16 @@ public class DepoimentoService {
                 depoimento.getId(),
                 depoimento.getNome(),
                 depoimento.getDepoimento(),
-                depoimento.getFoto()
-        );
+                depoimento.getFoto());
     }
 
     public DepoimentoDto update(Long id, DepoimentoUpdateDto dto) {
-        var depoimento = new Depoimento(id, dto.nome(), dto.depoimento(), dto.foto());
-        depoimento = repository.save(depoimento);
+        var result = repository.setDepoimentoInfoById(id, dto.nome(), dto.depoimento(), dto.foto());
 
-        return new DepoimentoDto(depoimento.getId(), depoimento.getNome(), depoimento.getDepoimento(), depoimento.getFoto());
+        if (result == 0) {
+            throw new EntityNotFoundException("Depoimento não encontrado.");
+        }
+
+        return new DepoimentoDto(id, dto.nome(), dto.depoimento(), dto.foto());
     }
 }
