@@ -2,6 +2,7 @@ package com.alura.challenge.backend.controllers;
 
 import com.alura.challenge.backend.domain.dtos.DepoimentoDto;
 import com.alura.challenge.backend.domain.dtos.DepoimentoInsertDto;
+import com.alura.challenge.backend.domain.dtos.DepoimentoUpdateDto;
 import com.alura.challenge.backend.services.DepoimentoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -13,7 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class DepoimentoController {
 
     private final DepoimentoService service;
-    
+
     public DepoimentoController(DepoimentoService service) {
         this.service = service;
     }
@@ -31,8 +32,15 @@ public class DepoimentoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DepoimentoDto> findById(@PathVariable @Validated Long id) {
+    public ResponseEntity<DepoimentoDto> findById(@PathVariable Long id) {
         var depoimento = service.findById(id);
+        return ResponseEntity.ok().body(depoimento);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<DepoimentoDto> update(@PathVariable Long id, @RequestBody DepoimentoUpdateDto dto) {
+        var depoimento = service.update(id, dto);
+
         return ResponseEntity.ok().body(depoimento);
     }
 }
