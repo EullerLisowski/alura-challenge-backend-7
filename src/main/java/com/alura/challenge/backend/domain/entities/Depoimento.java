@@ -1,5 +1,7 @@
 package com.alura.challenge.backend.domain.entities;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,4 +26,22 @@ public class Depoimento {
 
     @Column
     private String foto;
+
+    @Column(name = "data_criacao")
+    private LocalDateTime dataCriacao;
+
+    @Column(name = "data_atualizacao")
+    private LocalDateTime dataAtualizacao;
+
+    @Column
+    private Boolean ativo;
+
+    public Depoimento(Long id, String nome, String depoimento, String foto) {
+        this.id = id;
+        this.nome = nome;
+        this.depoimento = depoimento;
+        this.foto = foto;
+        this.dataCriacao = LocalDateTime.now();
+        this.ativo = true;
+    }
 }
