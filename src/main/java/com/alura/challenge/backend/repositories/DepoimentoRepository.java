@@ -15,4 +15,9 @@ public interface DepoimentoRepository extends JpaRepository<Depoimento, Long> {
     @Transactional
     @Query("update Depoimento d set d.nome = ?2, d.depoimento =?3, d.foto = ?4, d.dataAtualizacao = now() where d.id = ?1")
     Integer setDepoimentoInfoById(Long id, String nome, String depoimento, String foto);
+
+    @Modifying
+    @Transactional
+    @Query("update Depoimento d set d.ativo = false where d.id = ?1")
+    Integer setDepoimentoDisabled(Long id);
 }
