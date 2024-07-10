@@ -44,4 +44,12 @@ public class DepoimentoService {
 
         return new DepoimentoDto(id, dto.nome(), dto.depoimento(), dto.foto());
     }
+
+    public void delete(Long id) {
+        var result = repository.setDepoimentoDisabled(id);
+
+        if (result == 0) {
+            throw new EntityNotFoundException("Depoimento não encontrado.");
+        }
+    }
 }
