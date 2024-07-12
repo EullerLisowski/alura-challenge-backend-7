@@ -18,10 +18,6 @@ import com.alura.challenge.backend.domain.dtos.DepoimentoDto;
 import com.alura.challenge.backend.domain.dtos.DepoimentoInsertDto;
 import com.alura.challenge.backend.domain.dtos.DepoimentoUpdateDto;
 import com.alura.challenge.backend.services.DepoimentoService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping
@@ -49,6 +45,13 @@ public class DepoimentoController {
     public ResponseEntity<DepoimentoDto> findById(@PathVariable Long id) {
         var depoimento = service.findById(id);
         return ResponseEntity.ok().body(depoimento);
+    }
+
+    @GetMapping("/depoimentos-home")
+    public ResponseEntity<List<DepoimentoDto>> findRandomThreeActive() {
+        var depoimentos = service.findRandomThreeActive();
+
+        return ResponseEntity.ok().body(depoimentos);
     }
 
     @PutMapping("/depoimentos/{id}")

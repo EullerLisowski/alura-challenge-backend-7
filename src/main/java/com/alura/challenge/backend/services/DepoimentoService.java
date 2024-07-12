@@ -1,5 +1,8 @@
 package com.alura.challenge.backend.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +54,21 @@ public class DepoimentoService {
         if (result == 0) {
             throw new EntityNotFoundException("Depoimento não encontrado.");
         }
+    }
+
+    public List<DepoimentoDto> findRandomThreeActive() {
+        var result = repository.findRandomThreeActive();
+        var depoimentos = new ArrayList<DepoimentoDto>();
+
+        result.forEach(depoimento -> {
+            depoimentos.add(
+                    new DepoimentoDto(
+                            depoimento.getId(),
+                            depoimento.getNome(),
+                            depoimento.getDepoimento(),
+                            depoimento.getFoto()));
+        });
+
+        return depoimentos;
     }
 }
