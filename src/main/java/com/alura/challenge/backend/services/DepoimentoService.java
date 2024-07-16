@@ -39,7 +39,7 @@ public class DepoimentoService {
     }
 
     public DepoimentoDto update(Long id, DepoimentoUpdateDto dto) {
-        var result = repository.setDepoimentoInfoById(id, dto.nome(), dto.depoimento(), dto.foto());
+        var result = repository.updateDepoimentoInfoById(id, dto.nome(), dto.depoimento(), dto.foto());
 
         if (result == 0) {
             throw new EntityNotFoundException("Depoimento não encontrado.");
@@ -49,7 +49,7 @@ public class DepoimentoService {
     }
 
     public void delete(Long id) {
-        var result = repository.setDepoimentoDisabled(id);
+        var result = repository.updateDepoimentoDisabled(id);
 
         if (result == 0) {
             throw new EntityNotFoundException("Depoimento não encontrado.");
@@ -60,14 +60,12 @@ public class DepoimentoService {
         var result = repository.findRandomThreeActive();
         var depoimentos = new ArrayList<DepoimentoDto>();
 
-        result.forEach(depoimento -> {
-            depoimentos.add(
-                    new DepoimentoDto(
-                            depoimento.getId(),
-                            depoimento.getNome(),
-                            depoimento.getDepoimento(),
-                            depoimento.getFoto()));
-        });
+        result.forEach(depoimento -> depoimentos.add(
+                new DepoimentoDto(
+                        depoimento.getId(),
+                        depoimento.getNome(),
+                        depoimento.getDepoimento(),
+                        depoimento.getFoto())));
 
         return depoimentos;
     }
