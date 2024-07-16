@@ -25,4 +25,6 @@ public interface DepoimentoRepository extends JpaRepository<Depoimento, Long> {
 
     @Query("select d from Depoimento d where d.ativo = true order by function('RAND') limit 3")
     List<Depoimento> findRandomThreeActive();
+
+    List<Depoimento> findByAtivoTrue();
 }

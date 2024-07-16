@@ -69,4 +69,20 @@ public class DepoimentoService {
 
         return depoimentos;
     }
+
+    public List<DepoimentoDto> findByAtivoTrue() {
+        var result = repository.findByAtivoTrue();
+        var depoimentos = new ArrayList<DepoimentoDto>();
+
+        result.forEach(depoimento -> {
+            depoimentos.add(
+                    new DepoimentoDto(
+                            depoimento.getId(),
+                            depoimento.getNome(),
+                            depoimento.getDepoimento(),
+                            depoimento.getFoto()));
+        });
+
+        return depoimentos;
+    }
 }

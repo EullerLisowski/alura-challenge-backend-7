@@ -54,6 +54,13 @@ public class DepoimentoController {
         return ResponseEntity.ok().body(depoimentos);
     }
 
+    @GetMapping("/depoimentos")
+    public ResponseEntity<List<DepoimentoDto>> findAll() {
+        var depoimentos = service.findByAtivoTrue();
+
+        return ResponseEntity.ok().body(depoimentos);
+    }
+
     @PutMapping("/depoimentos/{id}")
     public ResponseEntity<DepoimentoDto> update(@PathVariable Long id, @RequestBody DepoimentoUpdateDto dto) {
         var depoimento = service.update(id, dto);
