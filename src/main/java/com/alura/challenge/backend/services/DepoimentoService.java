@@ -29,7 +29,7 @@ public class DepoimentoService {
     }
 
     public DepoimentoDto findById(Long id) {
-        var depoimento = repository.findById(id).orElseThrow();
+        var depoimento = repository.findByIdAndAtivoTrue(id).orElseThrow();
 
         return new DepoimentoDto(
                 depoimento.getId(),
