@@ -1,13 +1,12 @@
 package com.alura.challenge.backend.exception;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.validation.FieldError;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import org.junit.jupiter.api.Test;
+import org.springframework.validation.FieldError;
 
 class StandardErrorTest {
 
@@ -24,13 +23,13 @@ class StandardErrorTest {
 
     @Test
     void givenAllArgsConstructor_whenCalled_thenObjectCreated() {
-        Long TIME_STAMP = System.currentTimeMillis();
-        Integer STATUS = 404;
-        FieldError FIELD_ERROR = new FieldError("objectName", "field", "message");
-        DataValidationError DATA_VALIDATION_ERROR = new DataValidationError(FIELD_ERROR);
-        List<DataValidationError> ERRORS = List.of(DATA_VALIDATION_ERROR);
-        String MESSAGE = "Test message";
-        String PATH = "/test-uri";
+        final Long TIME_STAMP = System.currentTimeMillis();
+        final Integer STATUS = 404;
+        final FieldError FIELD_ERROR = new FieldError("objectName", "field", "message");
+        final DataValidationError DATA_VALIDATION_ERROR = new DataValidationError(FIELD_ERROR);
+        final List<DataValidationError> ERRORS = List.of(DATA_VALIDATION_ERROR);
+        final String MESSAGE = "Test message";
+        final String PATH = "/test-uri";
 
         StandardError error = new StandardError(TIME_STAMP, STATUS, ERRORS, MESSAGE, PATH);
 

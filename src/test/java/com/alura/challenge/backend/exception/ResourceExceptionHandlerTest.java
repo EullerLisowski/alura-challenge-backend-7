@@ -1,22 +1,22 @@
 package com.alura.challenge.backend.exception;
 
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.servlet.http.HttpServletRequest;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
 
 @SuppressWarnings("null")
 class ResourceExceptionHandlerTest {
@@ -31,8 +31,8 @@ class ResourceExceptionHandlerTest {
     @Test
     void givenEntityNotFoundException_whenHandleException_thenReturnsNotFoundResponse() {
 
-        String TEST_MESSAGE = "Test message";
-        String TEST_URI = "/test-uri";
+        final String TEST_MESSAGE = "Test message";
+        final String TEST_URI = "/test-uri";
 
         // arrange
         EntityNotFoundException entityNotFoundException = new EntityNotFoundException(TEST_MESSAGE);
@@ -53,13 +53,13 @@ class ResourceExceptionHandlerTest {
 
     @Test
     void givenMethodArgumentNotValidException_whenHandleException_thenReturnsBadRequestResponse() {
-        String MESSAGE_NOME_REQUIRED = "O campo 'nome' deve ser informado.";
-        String MESSAGE_DEPOIMENTO_REQUIRED = "O campo 'depoimento' deve ser informado.";
-        String MESSAGE_INVALID_REQUEST = "Requisição inválida.";
-        String TEST_URI = "/test-uri";
-        String OBJECT_NAME = "objectName";
-        String DATA_VALIDATION_ERROR_FIELD_NOME = "nome";
-        String DATA_VALIDATION_ERROR_FIELD_DEPOIMENTO = "depoimento";
+        final String MESSAGE_NOME_REQUIRED = "O campo 'nome' deve ser informado.";
+        final String MESSAGE_DEPOIMENTO_REQUIRED = "O campo 'depoimento' deve ser informado.";
+        final String MESSAGE_INVALID_REQUEST = "Requisição inválida.";
+        final String TEST_URI = "/test-uri";
+        final String OBJECT_NAME = "objectName";
+        final String DATA_VALIDATION_ERROR_FIELD_NOME = "nome";
+        final String DATA_VALIDATION_ERROR_FIELD_DEPOIMENTO = "depoimento";
 
         // arrange
         MethodArgumentNotValidException methodArgumentNotValidException = mock(MethodArgumentNotValidException.class);
@@ -91,8 +91,8 @@ class ResourceExceptionHandlerTest {
     @Test
     void givenNoSuchElementException_whenHandleException_thenReturnsNotFoundResponse() {
 
-        String TEST_MESSAGE = "Nenhum registro encontrado para os parâmetros informados.";
-        String TEST_URI = "/test-uri";
+        final String TEST_MESSAGE = "Nenhum registro encontrado para os parâmetros informados.";
+        final String TEST_URI = "/test-uri";
 
         // arrange
         NoSuchElementException noSuchElementException = new NoSuchElementException(TEST_MESSAGE);
