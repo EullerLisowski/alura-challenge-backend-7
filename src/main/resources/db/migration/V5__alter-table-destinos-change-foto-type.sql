@@ -1,0 +1,1 @@
+alter table destinos modify foto varchar(255);
