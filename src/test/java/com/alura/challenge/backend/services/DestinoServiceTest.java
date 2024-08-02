@@ -48,4 +48,24 @@ class DestinoServiceTest {
         // assert
         assertNotNull(destinoDto);
     }
+
+    @Test
+    @DisplayName("Deve retornar uma lista de DestinoDtl quando destinoService.findAll é chamado")
+    void testDestinoServiceFindAll() {
+        // arrange
+        final Long ID = 2000L;
+        final String NOME = "Nome Teste";
+        final String FOTO = "Foto Teste";
+        final Double PRECO = 100.00;
+
+        Destino destino = new Destino(ID, NOME, FOTO, PRECO);
+
+        Mockito.when(repository.findAll()).thenReturn(java.util.List.of(destino));
+
+        // act
+        java.util.List<DestinoDto> destinoDtos = destinoService.findAll();
+
+        // assert
+        assertNotNull(destinoDtos);
+    }
 }

@@ -8,10 +8,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Table(name = "destinos")
 @Entity(name = "Destino")
 @Builder
+@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Destino {
     @Id

@@ -1,5 +1,8 @@
 package com.alura.challenge.backend.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,20 @@ public class DestinoService {
         destino = repository.save(destino);
 
         return new DestinoDto(destino.id, destino.nome, destino.foto, destino.preco);
+    }
+
+    public List<DestinoDto> findAll() {
+        var results = repository.findAll();
+        var destinos = new ArrayList<DestinoDto>();
+
+        results.forEach(destino -> destinos.add(
+                new DestinoDto(
+                        destino.id,
+                        destino.nome,
+                        destino.foto,
+                        destino.preco)));
+
+        return destinos;
     }
 
 }
