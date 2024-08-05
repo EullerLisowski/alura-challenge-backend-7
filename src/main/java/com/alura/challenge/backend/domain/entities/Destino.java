@@ -36,4 +36,10 @@ public class Destino {
         this.preco = preco;
     }
 
+    public Destino(String nome, String foto, Double preco) {
+        this.nome = nome;
+        this.foto = foto;
+        this.preco = preco;
+    }
+
 }

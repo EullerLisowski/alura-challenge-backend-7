@@ -14,7 +14,7 @@ public class DestinoService {
     private DestinoRepository repository;
 
     public DestinoDto create(DestinoInsertDto destinoInsertDto) {
-        var destino = new Destino(null, destinoInsertDto.nome(), destinoInsertDto.foto(), destinoInsertDto.preco());
+        var destino = new Destino(destinoInsertDto.nome(), destinoInsertDto.foto(), destinoInsertDto.preco());
         destino = repository.save(destino);
 
         return new DestinoDto(destino.id, destino.nome, destino.foto, destino.preco);
